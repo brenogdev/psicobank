@@ -1,3 +1,4 @@
+import React from "react";
 import { Close } from "@mui/icons-material";
 import {
   Box,
@@ -11,7 +12,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React from "react";
 import { ModalAlert } from "./ModalAlert";
 
 type ModalRegisterProps = {
@@ -34,7 +34,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
   const [maxWidth] = React.useState<DialogProps["maxWidth"]>("md");
 
   return (
-    <Dialog open fullScreen={fullScreen} maxWidth={maxWidth} fullWidth>
+    <Dialog open={open} fullScreen={fullScreen} maxWidth={maxWidth} fullWidth>
       <DialogTitle
         display="flex"
         alignItems="center"
@@ -42,7 +42,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
         color="#3D3D3D"
       >
         <Typography variant="h1">Ativar o PsicoBank</Typography>
-        <IconButton>
+        <IconButton onClick={onCancel}>
           <Close />
         </IconButton>
       </DialogTitle>

@@ -3,10 +3,12 @@
 import React from "react";
 import { FormRegisterAccount } from "@/components/FormRegisterAccount";
 import { ModalRegister } from "@/components/ModalRegister";
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 
 export default function Root() {
+  const [openModal, setOpemModal] = React.useState<boolean>(false);
+
   const methods = useForm();
 
   const handleNextSubmitForm = (data: any) => {
@@ -14,13 +16,16 @@ export default function Root() {
   };
 
   return (
-    <Box>
       <FormProvider {...methods}>
         <ModalRegister
+          open={openModal}
+          onCancel={() => setOpemModal(false)}
+          stepper={<h1>stepper aqui</h1>}
           content={<FormRegisterAccount />}
           actions={
             <>
               <Button
+                onClick={() => setOpemModal(false)}
                 variant="outlined"
                 sx={{ textTransform: "capitalize", width: 124 }}
               >
@@ -36,8 +41,7 @@ export default function Root() {
               </Button>
             </>
           }
-        ></ModalRegister>
+        />
       </FormProvider>
-    </Box>
   );
 }

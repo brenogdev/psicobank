@@ -1,19 +1,21 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useServerInsertedHTML } from 'next/navigation';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
-import { customTheme } from '@/theme/customTheme';
+import React from "react";
+import { useServerInsertedHTML } from "next/navigation";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
+import { customTheme } from "@/theme/customTheme";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "@/store";
 
 export default function ThemeRegistry({
-    children
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode;
 }) {
- const options = {key: 'mui'}
+  const options = { key: "mui" };
 
   const [{ cache, flush }] = React.useState(() => {
     const cache = createCache(options);
@@ -40,14 +42,14 @@ export default function ThemeRegistry({
     if (names.length === 0) {
       return null;
     }
-    let styles = '';
+    let styles = "";
     for (const name of names) {
       styles += cache.inserted[name];
     }
     return (
       <style
         key={cache.key}
-        data-emotion={`${cache.key} ${names.join(' ')}`}
+        data-emotion={`${cache.key} ${names.join(" ")}`}
         dangerouslySetInnerHTML={{
           __html: styles,
         }}
@@ -56,11 +58,15 @@ export default function ThemeRegistry({
   });
 
   return (
-    <CacheProvider value={cache}>
-      <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </CacheProvider>
+    <ReduxProvider store={store}>
+      <CacheProvider value={cache}>
+        <ThemeProvider theme={customTheme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
+      </CacheProvider>
+    </ReduxProvider>
   );
 }
+
+

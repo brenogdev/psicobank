@@ -1,8 +1,7 @@
-
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import ThemeRegistry from "@/components/ui/ThemeRegistry";
 import LayoutBase from "@/components/ui/LayoutBase";
+import ThemeRegistry from "@/components/ui/ThemeRegistry";
 
 import "./globals.css";
 
@@ -25,9 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <ThemeRegistry>
-          <LayoutBase>{children}</LayoutBase>
-        </ThemeRegistry>
+          <ThemeRegistry>
+            <LayoutBase>{children}</LayoutBase>
+          </ThemeRegistry>
       </body>
     </html>
   );

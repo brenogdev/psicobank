@@ -15,7 +15,11 @@ export const InputPhone = () => {
       control={control}
       defaultValue=""
       render={({ field: { onChange, value } }) => (
-        <ReactInputMask mask="(99) 9 9999-9999" value={value} onChange={onChange}>
+        <ReactInputMask
+          mask="(99) 9 9999-9999"
+          value={value}
+          onChange={onChange}
+        >
           {(inputProps) => (
             <TextField
               error={!!errors?.phone?.message}

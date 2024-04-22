@@ -1,11 +1,43 @@
-import { Box, Button, Typography } from '@mui/material'
-import React from 'react'
+"use client";
+
+import React from "react";
+import { FormRegisterAccount } from "@/components/FormRegisterAccount";
+import { ModalRegister } from "@/components/ModalRegister";
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
 
 export default function Root() {
+  const methods = useForm();
+
+  const handleNextSubmitForm = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <Box>
-      <Typography variant='h1'>ola mundo</Typography>
-      <Button variant='outlined'>page</Button>
+      <FormProvider {...methods}>
+        <ModalRegister
+          content={<FormRegisterAccount />}
+          actions={
+            <>
+              <Button
+                variant="outlined"
+                sx={{ textTransform: "capitalize", width: 124 }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ textTransform: "capitalize", width: 124 }}
+                type="submit"
+                onClick={methods.handleSubmit(handleNextSubmitForm)}
+              >
+                Próximo
+              </Button>
+            </>
+          }
+        ></ModalRegister>
+      </FormProvider>
     </Box>
-  )
+  );
 }

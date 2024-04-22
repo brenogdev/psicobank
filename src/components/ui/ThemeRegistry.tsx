@@ -2,12 +2,11 @@
 
 import React from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
-import { CacheProvider } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
-import { customTheme } from '@/app/theme/customTheme';
 import CssBaseline from '@mui/material/CssBaseline';
 import createCache from '@emotion/cache';
-
+import { CacheProvider } from '@emotion/react';
+import { customTheme } from '@/theme/customTheme';
 
 export default function ThemeRegistry({
     children
@@ -21,7 +20,7 @@ export default function ThemeRegistry({
     cache.compat = true;
     const prevInsert = cache.insert;
     let inserted: string[] = [];
-    cache.insert = (...args) => {
+    cache.insert = (...args: any[]) => {
       const serialized = args[1];
       if (cache.inserted[serialized.name] === undefined) {
         inserted.push(serialized.name);

@@ -3,124 +3,91 @@ import { Grid } from "@mui/material";
 import { InputSelect } from "./ui/InputSelect";
 import { InputText } from "./ui/InputText";
 import { InputMask } from "./ui/InputMask";
+import { ACCOUNT_TYPE, BANK, TYPE_OF_PERSON } from "@/constants/formValues";
+import { ModalAlert } from "./ui/ModalAlert";
 
 export const FormRegisterAccount = () => {
   return (
-    <Grid container spacing={2}>
-      <Grid item sm={12} md={12}>
+    <Grid container spacing={2.5}>
+      <Grid item sm={12} xs={12} md={12}>
+        <ModalAlert type="warning" />
+      </Grid>
+      <Grid item sm={12} xs={12} md={12}>
+        <InputText
+          name="professional"
+          label="Profissional:"
+          isRequired
+          disabled
+          defaultValue={"João Silva"}
+        />
+      </Grid>
+      <Grid item sm={12} xs={12} md={6}>
+        <InputSelect isRequired label="Banco:" name="bank" options={BANK} error />
+      </Grid>
+      <Grid item sm={12} xs={12} md={6}>
         <InputSelect
           isRequired
-          label="esss"
-          name="teste"
-          options={[
-            {
-              label: "João Silva",
-              value: "1",
-            },
-          ]}
-          disabled
+          label="Tipo de conta:"
+          name="accountType"
+          options={ACCOUNT_TYPE}
         />
       </Grid>
-      <Grid item sm={12} md={6}>
+      <Grid item sm={12} xs={12} md={6}>
+        <InputText name="agency" label="Agência:" isRequired />
+      </Grid>
+      <Grid item sm={12} xs={12} md={6}>
+        <InputText
+          name="accountWithDigit"
+          label="Conta com dígito:"
+          isRequired
+        />
+      </Grid>
+      <Grid item sm={12} xs={12} md={4}>
         <InputSelect
           isRequired
-          label="esss"
-          name="teste"
-          options={[
-            {
-              label: "João Silva",
-              value: "1",
-            },
-          ]}
-          disabled
+          label="Tipo de pessoa:"
+          name="typeOfPerson"
+          options={TYPE_OF_PERSON}
         />
       </Grid>
-      <Grid item sm={12} md={6}>
-        <InputSelect
-          isRequired
-          label="esss"
-          name="teste"
-          options={[
-            {
-              label: "João Silva",
-              value: "1",
-            },
-          ]}
-          disabled
-        />
+      <Grid item sm={12} xs={12} md={4}>
+        <InputMask mask="999.999.999-99" label="CPF:" name="cpf" isRequired />
       </Grid>
-      <Grid item sm={12} md={6}>
-        <InputText name="example" label="Example" isRequired={true} />
-      </Grid>
-      <Grid item sm={12} md={6}>
-        <InputText name="example" label="Example" isRequired={true} />
-      </Grid>
-      <Grid item sm={12} md={4}>
-        <InputSelect
-          isRequired
-          label="esss"
-          name="teste"
-          options={[
-            {
-              label: "João Silva",
-              value: "1",
-            },
-          ]}
-          disabled
-        />
-      </Grid>
-      <Grid item sm={12} md={4}>
-        <InputMask
-          mask="999.999.999-99"
-          label="CPF"
-          name="cpf"
-          isRequired
-          errorMessage="sasas"
-        />
-      </Grid>
-      <Grid item sm={12} md={4}>
+      <Grid item sm={12} xs={12} md={4}>
         <InputMask
           mask="(99) 9999-9999"
-          label="Telefone"
-          name="telefone"
+          label="Telefone:"
+          name="phone"
           isRequired
-          errorMessage="testet"
         />
       </Grid>
-      <Grid item sm={12} md={12}>
-        <InputText name="fullName" label="Nome Completo" isRequired={true} />
+      <Grid item sm={12} xs={12} md={12}>
+        <InputText name="fullName" label="Nome Completo:" isRequired />
       </Grid>
-      <Grid item sm={12} md={4}>
-        <InputMask
-          mask="99.999-999"
-          label="CEP"
-          name="cep"
-          isRequired
-          errorMessage="testet"
-        />
+      <Grid item sm={12} xs={12} md={4}>
+        <InputMask mask="99.999-999" label="CEP:" name="zipCode" isRequired />
       </Grid>
-      <Grid item sm={12} md={4}>
+      <Grid item sm={12} xs={12} md={4}>
         <InputSelect
           isRequired
           label="Estado"
-          name="teste"
+          name="state"
           options={[
             {
               label: "João Silva",
               value: "1",
             },
           ]}
-          disabled
         />
       </Grid>
-      <Grid item sm={12} md={4}>
-        <InputText name="fullName" label="Cidade" isRequired={true} />
+      <Grid item sm={12} xs={12} md={4}>
+        <InputText name="city" label="Cidade:" isRequired />
       </Grid>
-      <Grid item sm={12} md={8}>
-        <InputText name="fullName" label="Endereço" isRequired={true} />
+      <Grid item sm={12} xs={12} md={8}>
+        <InputText name="address" label="Endereço:" isRequired />
       </Grid>
-      <Grid item sm={12} md={4}>
-        <InputText name="fullName" label="Número" isRequired={true} />
+      <Grid item sm={12} xs={12} md={4}>
+        <InputText name="number" label="Número:" isRequired />
       </Grid>
     </Grid>
   );

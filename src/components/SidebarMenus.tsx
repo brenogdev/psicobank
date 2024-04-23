@@ -4,13 +4,15 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  ListItemButtonProps
+  ListItemButtonProps,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 
 type SidebarMenusProps = ListItemButtonProps & {
   open: boolean;
   label: string;
-  icon:  React.JSX.Element;
+  icon: React.JSX.Element;
 };
 
 export const SidebarMenus: React.FC<SidebarMenusProps> = ({
@@ -19,8 +21,11 @@ export const SidebarMenus: React.FC<SidebarMenusProps> = ({
   icon,
   ...rest
 }) => {
+  const theme = useTheme();
+  const smScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <ListItem disablePadding sx={{ display: "block",  }}>
+    <ListItem disablePadding sx={{ display: "block" }}>
       <ListItemButton
         {...rest}
         sx={{
@@ -36,12 +41,12 @@ export const SidebarMenus: React.FC<SidebarMenusProps> = ({
         <ListItemIcon
           sx={{
             minWidth: 0,
-            color: '#8E9EAE'
+            color: "#8E9EAE",
           }}
         >
           {icon}
         </ListItemIcon>
-        <ListItemText primary={label} />
+        {!open && smScreen ? null : <ListItemText primary={label} />}
       </ListItemButton>
     </ListItem>
   );

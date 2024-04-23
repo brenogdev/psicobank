@@ -1,15 +1,14 @@
 import React from "react";
 import { Box, FormControl, Stack, TextField, Typography } from "@mui/material";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, FieldError, useFormContext } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
-import error from "next/error";
 
 type InputMaskProps = {
   mask: string;
   name: string;
   label: string;
   isRequired: boolean;
-  errorMessage?: string;
+  isSmall?: boolean;
 };
 
 export const InputMask: React.FC<InputMaskProps> = ({
@@ -17,7 +16,7 @@ export const InputMask: React.FC<InputMaskProps> = ({
   name,
   label,
   isRequired,
-  errorMessage,
+  isSmall,
   ...rest
 }) => {
   const {
@@ -25,30 +24,23 @@ export const InputMask: React.FC<InputMaskProps> = ({
     formState: { errors },
   } = useFormContext();
 
+  const error: FieldError | undefined = errors[name] as FieldError;
+
   return (
     <Controller
-      name="phone"
+      name={name}
       control={control}
       defaultValue=""
       render={({ field: { onChange, value } }) => (
         <ReactInputMask mask={mask} value={value} onChange={onChange}>
           {(inputProps) => (
-            // <TextField
-            //   error={!!errors?.phone?.message}
-            //   label="Phone"
-            //   variant="outlined"
-            //   type="text"
-            //   fullWidth
-            //   required
-            //   {...inputProps}
-            // />
             <FormControl
               size="small"
               fullWidth
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: 1,
+                gap: 0.5,
               }}
               error={!!error}
             >
@@ -59,17 +51,17 @@ export const InputMask: React.FC<InputMaskProps> = ({
                 alignItems="center"
                 gap={1}
               >
-                <Typography variant="body1">{label}:</Typography>
+                <Typography variant="body1">{label}</Typography>
                 {isRequired && <Stack color="red">*</Stack>}
               </Box>
               <TextField
                 id={name}
                 label=""
                 error={!!error}
-                helperText={error ? errorMessage || error.message : ""}
                 {...rest}
                 variant="outlined"
                 size="small"
+                sx={isSmall ? { width: 155 } : { width: "100%" }}
               />
             </FormControl>
           )}

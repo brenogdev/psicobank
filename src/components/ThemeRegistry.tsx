@@ -9,6 +9,7 @@ import { CacheProvider } from "@emotion/react";
 import { customTheme } from "@/theme/customTheme";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "@/store";
+import { ToastContainer } from 'react-toastify';
 
 export default function ThemeRegistry({
   children,
@@ -62,6 +63,7 @@ export default function ThemeRegistry({
       <CacheProvider value={cache}>
         <ThemeProvider theme={customTheme}>
           <CssBaseline />
+          <ToastContainer />
           {children}
         </ThemeProvider>
       </CacheProvider>

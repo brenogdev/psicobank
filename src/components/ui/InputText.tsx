@@ -38,7 +38,7 @@ export const InputText: React.FC<InputTextProps & TextFieldProps> = ({
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 1,
+        gap: 0.5,
       }}
       error={!!error}
     >
@@ -49,18 +49,22 @@ export const InputText: React.FC<InputTextProps & TextFieldProps> = ({
         alignItems="center"
         gap={1}
       >
-        <Typography variant="body1">{label}:</Typography>
+        <Typography variant="body1">{label}</Typography>
         {isRequired && <Stack color="red">*</Stack>}
       </Box>
       <TextField
-        id={name}
-        label=""
-        {...register(name)}
-        error={!!error}
-        helperText={error ? errorMessage || error.message : ""}
         {...rest}
+        {...register(name)}
+        id={name}
+        error={!!error}
         variant="outlined"
         size="small"
+        fullWidth
+        sx={{
+          "& input:disabled": {
+            backgroundColor: "#CCD1D3",
+          },
+        }}
       />
     </FormControl>
   );

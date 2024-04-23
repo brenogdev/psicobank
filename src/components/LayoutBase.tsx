@@ -13,7 +13,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import Logo from "@/assets/logo.svg";
+import { useAppDispatch } from "@/hooks/useAppRedux";
+import { openModal } from "@/features/modalStepperSlice";
+import { LogoIcon } from "./assets/icons/LogoIcon";
 
 const DRAWER_WIDTH = 240;
 
@@ -100,6 +102,8 @@ export default function LayoutBase({
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const dispatch = useAppDispatch();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -112,7 +116,7 @@ export default function LayoutBase({
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          {!open && <Image src={Logo} alt="Logo" objectFit="cover" />}
+          {!open && <LogoIcon />}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -129,7 +133,7 @@ export default function LayoutBase({
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <Image src={Logo} alt="Logo" objectFit="cover" />
+          <LogoIcon />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -144,7 +148,7 @@ export default function LayoutBase({
             icon={<Settings />}
             label="Configuração"
             open={open}
-            onClick={() => alert("Pain")}
+            onClick={() => dispatch(openModal())}
           />
         </List>
       </Drawer>

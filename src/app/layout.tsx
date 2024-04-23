@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import LayoutBase from "@/components/ui/LayoutBase";
-import ThemeRegistry from "@/components/ui/ThemeRegistry";
+import LayoutBase from "@/components/LayoutBase";
+import ThemeRegistry from "@/components/ThemeRegistry";
 
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 const roboto = Roboto({

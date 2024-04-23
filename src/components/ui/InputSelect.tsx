@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormContext, FieldValues, FieldError } from "react-hook-form";
+import { InfoIcon } from "../assets/icons/Info";
 
 interface Option {
   value: string | number;
@@ -21,7 +22,7 @@ interface InputSelectProps {
   label: string;
   options: Option[];
   isRequired: boolean;
-  errorMessage?: string;
+  hasInfo?: boolean;
 }
 
 export const InputSelect: React.FC<InputSelectProps & SelectProps> = ({
@@ -29,7 +30,7 @@ export const InputSelect: React.FC<InputSelectProps & SelectProps> = ({
   label,
   options,
   isRequired,
-  errorMessage,
+  hasInfo,
   ...rest
 }) => {
   const {
@@ -57,13 +58,15 @@ export const InputSelect: React.FC<InputSelectProps & SelectProps> = ({
         alignItems="center"
         gap={1}
       >
-        <Typography variant="body1">{label}:</Typography>
+        <Typography variant="body1">{label}</Typography>
+        {hasInfo && <InfoIcon />}
         {isRequired && <Stack color="red">*</Stack>}
       </Box>
       <Select
         labelId={`${name}-label`}
         {...register(name)}
         {...rest}
+        fullWidth
       >
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>
@@ -71,7 +74,6 @@ export const InputSelect: React.FC<InputSelectProps & SelectProps> = ({
           </MenuItem>
         ))}
       </Select>
-      {error && <FormHelperText>{errorMessage || error.message}</FormHelperText>}
     </FormControl>
   );
 };

@@ -8,13 +8,15 @@ import {
   DialogProps,
   DialogTitle,
   IconButton,
+  Slide,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { ModalAlert } from "./ModalAlert";
+import { TransitionProps } from "@mui/material/transitions";
 
-type ModalRegisterProps = {
+type ModalProps = {
   open: boolean;
   onCancel: () => void;
   content: React.JSX.Element;
@@ -22,19 +24,35 @@ type ModalRegisterProps = {
   actions: React.JSX.Element;
 };
 
-export const ModalRegister: React.FC<ModalRegisterProps> = ({
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+export const Modal: React.FC<ModalProps> = ({
   open,
   content,
   onCancel,
   stepper,
-  actions
+  actions,
 }) => {
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [maxWidth] = React.useState<DialogProps["maxWidth"]>("md");
 
   return (
-    <Dialog open={open} fullScreen={fullScreen} maxWidth={maxWidth} fullWidth>
+    <Dialog
+      open={open}
+      fullScreen={fullScreen}
+      maxWidth={maxWidth}
+      fullWidth
+      TransitionComponent={Transition}
+      keepMounted
+    >
       <DialogTitle
         display="flex"
         alignItems="center"
@@ -47,20 +65,15 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
         </IconButton>
       </DialogTitle>
       <DialogContent>
-        <Box>{stepper}</Box>
+        <Box mt={3}>{stepper}</Box>
         <Box my={2}>
           <Typography variant="h2">
             Preencha os itens a seguir para configurar o PsicoBank
           </Typography>
         </Box>
-        <Box mb={2}>
-          <ModalAlert />
-        </Box>
-        {content}
+        <Box>{content}</Box>
       </DialogContent>
-      <DialogActions>
-       {actions}
-      </DialogActions>
+      <DialogActions>{actions}</DialogActions>
     </Dialog>
   );
 };

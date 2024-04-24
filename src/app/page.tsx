@@ -37,13 +37,16 @@ export default function Root() {
   const error = methods.formState.errors;
 
   const handleNextStepper = () => {
-    if (error) {
-      toast.error("Os campos obrigatórios não foram preenchidos");
+    // if (error) {
+    //   toast.error("Os campos obrigatórios não foram preenchidos");
       
-    }
-    if (!error) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
+    // }
+    // if (!error) {
+    //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    // }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
   };
 
   const handleResetStepper = () => {
